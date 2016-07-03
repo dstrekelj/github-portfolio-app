@@ -50,8 +50,8 @@ public class HomeActivity extends AppCompatActivity implements
         mUserFragment = new UserFragment();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.pane_master, mMenuFragment);
-        ft.add(R.id.pane_detail, mUserFragment);
+        ft.replace(R.id.pane_master, mMenuFragment);
+        ft.replace(R.id.pane_detail, mUserFragment);
         ft.commit();
 
         splPanes.setSliderFadeColor(Color.TRANSPARENT);
@@ -89,8 +89,13 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
-        mHomePresenter = new HomePresenter(UserRepository.getInstance(getApplicationContext()), mUserFragment);
         super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHomePresenter = new HomePresenter(UserRepository.getInstance(getApplicationContext()), mUserFragment);
     }
 
     @Override

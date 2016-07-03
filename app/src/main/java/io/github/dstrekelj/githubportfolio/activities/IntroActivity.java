@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import io.github.dstrekelj.githubportfolio.R;
 import io.github.dstrekelj.githubportfolio.data.sources.IUserDataSource;
 import io.github.dstrekelj.githubportfolio.data.UserRepository;
@@ -17,6 +20,8 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
 
         UserRepository userRepository = UserRepository.getInstance(getApplicationContext());
         userRepository.refresh(new IUserDataSource.RefreshCallback() {

@@ -3,6 +3,8 @@ package io.github.dstrekelj.githubportfolio.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import io.github.dstrekelj.githubportfolio.data.sources.IUserDataSource;
 import io.github.dstrekelj.githubportfolio.data.sources.UserLocalDataSource;
 import io.github.dstrekelj.githubportfolio.data.sources.UserRemoteDataSource;

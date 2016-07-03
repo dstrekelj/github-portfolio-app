@@ -12,6 +12,9 @@ public class User {
 
     private long id;
 
+    @SerializedName("avatar_url")
+    private String avatarUrl;
+
     @SerializedName("html_url")
     private String htmlUrl;
 
@@ -40,9 +43,10 @@ public class User {
     public User() {
     }
 
-    public User(String login, long id, String htmlUrl, String name, String company, String blog, String location, String email, String bio, int publicRepos, int publicGists, int followers, int following) {
+    public User(String login, long id, String avatarUrl, String htmlUrl, String name, String company, String blog, String location, String email, String bio, int publicRepos, int publicGists, int followers, int following) {
         this.login = login;
         this.id = id;
+        this.avatarUrl = avatarUrl;
         this.htmlUrl = htmlUrl;
         this.name = name;
         this.company = company;
@@ -71,6 +75,10 @@ public class User {
     public void setId(long id) {
         this.id = id;
     }
+
+    public String getAvatarUrl() { return avatarUrl; }
+
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
 
     public String getHtmlUrl() {
         return htmlUrl;
