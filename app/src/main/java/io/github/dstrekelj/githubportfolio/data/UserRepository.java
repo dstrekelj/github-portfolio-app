@@ -1,6 +1,7 @@
 package io.github.dstrekelj.githubportfolio.data;
 
 import android.content.Context;
+import android.util.Log;
 
 import io.github.dstrekelj.githubportfolio.data.sources.IUserDataSource;
 import io.github.dstrekelj.githubportfolio.data.sources.UserLocalDataSource;
@@ -42,9 +43,10 @@ public class UserRepository implements IUserDataSource {
     public void getUser(GetUserCallback callback) {
         if (callback != null) {
             if (mCachedUser != null) {
+                Log.d(TAG, mCachedUser.getEmail());
                 callback.onSuccess(mCachedUser);
             } else {
-                mUserRemoteDataSource.getUser(callback);
+                callback.onFailure("No user cached");
             }
         }
     }
@@ -56,5 +58,24 @@ public class UserRepository implements IUserDataSource {
             mUserRemoteDataSource.setUser(user);
             mUserLocalDataSource.setUser(user);
         }
+    }
+
+    @Override
+    public void refresh(final RefreshCallback callback) {
+        mUserRemoteDataSource.getUser(new GetUserCallback() {
+            @Override
+            public void onSuccess(User user) {
+                Log.d(TAG, "Refresh Success");
+                mCachedUser = user;
+                callback.onSuccess();
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.d(TAG, "Refresh Failure");
+                mCachedUser = null;
+                callback.onFailure("Failed to refresh");
+            }
+        });
     }
 }

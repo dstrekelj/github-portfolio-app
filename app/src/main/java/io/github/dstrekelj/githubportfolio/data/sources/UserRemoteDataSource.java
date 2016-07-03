@@ -31,17 +31,16 @@ public class UserRemoteDataSource implements IUserDataSource {
 
     @Override
     public void getUser(final GetUserCallback callback) {
+        Log.d(TAG, "getUser");
         Call<User> userCall = mGitHubServiceAPI.getUser("dstrekelj");
         userCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.d(TAG, response.body().getEmail());
                 callback.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.d(TAG, t.toString());
                 callback.onFailure(t.toString());
             }
         });
@@ -49,6 +48,11 @@ public class UserRemoteDataSource implements IUserDataSource {
 
     @Override
     public void setUser(User user) {
+        // Do nothing
+    }
+
+    @Override
+    public void refresh(RefreshCallback callback) {
         // Do nothing
     }
 }

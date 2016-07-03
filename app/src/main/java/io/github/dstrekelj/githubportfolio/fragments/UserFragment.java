@@ -3,6 +3,7 @@ package io.github.dstrekelj.githubportfolio.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class UserFragment extends Fragment implements IUserView {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
     }
 
@@ -42,6 +44,7 @@ public class UserFragment extends Fragment implements IUserView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
+        Log.d(TAG, "onCreateView");
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -49,6 +52,7 @@ public class UserFragment extends Fragment implements IUserView {
 
     @Override
     public void showUser(User user) {
+        Log.d(TAG, "showUser");
         tvEmail.setText(user.getEmail());
         tvName.setText(user.getName());
         tvLogin.setText(user.getLogin());

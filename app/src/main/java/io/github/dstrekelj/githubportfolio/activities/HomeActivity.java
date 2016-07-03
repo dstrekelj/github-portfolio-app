@@ -43,20 +43,8 @@ public class HomeActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ButterKnife.setDebug(true);
+
         ButterKnife.bind(this);
-
-        UserRepository.getInstance(getApplicationContext()).getUser(new IUserDataSource.GetUserCallback() {
-            @Override
-            public void onSuccess(User user) {
-                Log.d(TAG, user.getName());
-            }
-
-            @Override
-            public void onFailure(String error) {
-                Log.d(TAG, error);
-            }
-        });
 
         mMenuFragment = new MenuFragment();
         mUserFragment = new UserFragment();
@@ -65,8 +53,6 @@ public class HomeActivity extends AppCompatActivity implements
         ft.add(R.id.pane_master, mMenuFragment);
         ft.add(R.id.pane_detail, mUserFragment);
         ft.commit();
-
-        mHomePresenter = new HomePresenter(UserRepository.getInstance(getApplicationContext()), mUserFragment);
 
         splPanes.setSliderFadeColor(Color.TRANSPARENT);
         splPanes.setPanelSlideListener(new SlidingPaneLayout.SimplePanelSlideListener() {
@@ -99,6 +85,12 @@ public class HomeActivity extends AppCompatActivity implements
                 }
             }
         });
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        mHomePresenter = new HomePresenter(UserRepository.getInstance(getApplicationContext()), mUserFragment);
+        super.onPostCreate(savedInstanceState);
     }
 
     @Override

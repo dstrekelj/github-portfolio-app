@@ -38,4 +38,9 @@ public class UserLocalDataSource implements IUserDataSource {
     public void setUser(User user) {
 
     }
+
+    @Override
+    public void refresh(RefreshCallback callback) {
+
+    }
 }

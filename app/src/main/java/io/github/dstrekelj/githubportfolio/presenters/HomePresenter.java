@@ -24,6 +24,7 @@ public class HomePresenter implements IHomePresenter {
         userRepository.getUser(new IUserDataSource.GetUserCallback() {
             @Override
             public void onSuccess(User user) {
+                Log.d(TAG, user.getEmail());
                 mUserView.showUser(user);
             }
 

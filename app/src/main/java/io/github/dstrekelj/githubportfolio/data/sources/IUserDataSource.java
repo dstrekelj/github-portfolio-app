@@ -11,7 +11,14 @@ public interface IUserDataSource {
         void onFailure(String error);
     }
 
+    interface RefreshCallback {
+        void onSuccess();
+        void onFailure(String error);
+    }
+
     void getUser(GetUserCallback callback);
 
     void setUser(User user);
+
+    void refresh(RefreshCallback callback);
 }

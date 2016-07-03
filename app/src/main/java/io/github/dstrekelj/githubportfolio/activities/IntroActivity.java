@@ -19,28 +19,17 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         UserRepository userRepository = UserRepository.getInstance(getApplicationContext());
-
-        userRepository.getUser(new IUserDataSource.GetUserCallback() {
+        userRepository.refresh(new IUserDataSource.RefreshCallback() {
             @Override
-            public void onSuccess(User user) {
-                Log.d(TAG, user.toString());
+            public void onSuccess() {
                 switchState();
             }
 
             @Override
             public void onFailure(String error) {
-                Log.d(TAG, error);
+
             }
         });
-
-        /*try {
-            Thread.sleep(2000);
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
     }
 
     private void switchState() {
